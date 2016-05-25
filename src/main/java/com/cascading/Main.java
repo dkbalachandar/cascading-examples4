@@ -26,7 +26,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("Hdfs Job Starts");
         //input and output path
         String inputPath = args[0];
         String outputPath = args[1];
@@ -47,7 +46,6 @@ public class Main {
         HadoopFlowConnector flowConnector = new HadoopFlowConnector(properties);
         FlowDef flowDef = FlowDef.flowDef().addSource(dataPipe, inTap).addTailSink(dataPipe, outTap).setName("Hdfs Job");
         flowConnector.connect(flowDef).complete();
-        System.out.println("Hdfs Job Ends");
     }
 
     /**
@@ -64,8 +62,6 @@ public class Main {
         public boolean isRemove(FlowProcess flowProcess, FilterCall filterCall) {
             TupleEntry arguments = filterCall.getArguments();
             String age = arguments.getString(1).trim();
-            System.out.println("name::" + arguments.getString(0));
-            System.out.println("age:: " + arguments.getString(1));
             return Integer.valueOf(age) >= 30;
         }
     }
